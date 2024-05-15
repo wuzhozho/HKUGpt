@@ -10,7 +10,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         try {
             const response = await axios.get(apiUrl);
             return res.status(200).json(response.data);
-        } catch (err) {
+        } catch (err:any) {
             console.error(err);
             return res.status(500).json({ error: `Error in fetching cat data with id: ${id}` });
         }

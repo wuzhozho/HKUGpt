@@ -20,7 +20,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 },
             });
             return res.status(201).json(response.data);
-        } catch (err) {
+        } catch (err:any) {
             console.error(err);
             return res.status(500).json({ error: "Error in creating new log." });
         }

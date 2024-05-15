@@ -37,7 +37,7 @@ const CatsPage = () => {
         }
     };
 
-    const deleteCat = async (id) => {
+    const deleteCat = async (id:any) => {
         try {
             await axios.delete(`/api/cats/${id}`);
             loadCats();
@@ -65,7 +65,7 @@ const CatsPage = () => {
         }
     };
     
-    const startEditing = (cat) => {
+    const startEditing = (cat:any) => {
         setEditingCatId(cat.id);
         setSelectedCat({
             cat_name: cat.attributes.cat_name,
@@ -79,7 +79,7 @@ const CatsPage = () => {
         setEditingCatId(null); // Reset editing mode
     };
 
-    const handleDelete = (catId) => {
+    const handleDelete = (catId:any) => {
         setCatToDelete(catId); // 保存将要删除的猫的id
         setIsModalOpen(true); // 显示确认删除的对话框
     }
@@ -111,7 +111,7 @@ const CatsPage = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {cats.map((cat) => (
+                    {cats.map((cat:any) => (
                         <tr key={cat.id}>
                             <td>{cat.id}</td>
                             <td>{cat.attributes.cat_name}</td>
@@ -134,7 +134,11 @@ const CatsPage = () => {
             </div>
             <div>
                 <label>Cat Age:</label>
-                <input type="number" onChange={e => setSelectedCat({...selectedCat, cat_age: Number(e.target.value) })} value={selectedCat.cat_age}/>
+                <input
+                    type="number"
+                    onChange={e => setSelectedCat({ ...selectedCat, cat_age: e.target.value })}
+                    value={selectedCat.cat_age !== undefined ? selectedCat.cat_age : ''}
+                />
             </div>
             <div>
                 <label>Cat Address:</label>

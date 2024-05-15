@@ -43,7 +43,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             console.log('User token', response.data.jwt);
             // 这里给回传了新的jwt，不知道什么意思，并未写入到全局变量，也不影响使用
             return res.status(201).json(response.data);
-        } catch (err) {
+        } catch (err:any) {
             // console.error(err);
             console.log('An error occurred:---------', err.response.data.error);
             return res.status(500).json({ error: err.response.data.error.message });

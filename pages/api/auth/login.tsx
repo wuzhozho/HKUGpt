@@ -16,7 +16,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             console.log('User profile', response.data.user);
             console.log('User token', response.data.jwt);
             return res.status(201).json(response.data);
-        } catch (err) {
+        } catch (err:any) {
             // console.error(err);
             console.log('An error occurred:---------', err.response.data.error);
             return res.status(500).json({ error: err.response.data.error.message });

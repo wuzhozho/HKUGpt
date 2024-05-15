@@ -24,12 +24,12 @@ const RegisterPage2: React.FC<Props> = ({ isOpen, onClose, onRegister }) => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [email, setEmail] = useState("");
-  const [usernameError, setUsernameError] = useState(null);
-  const [passwordError, setPasswordError] = useState(null);
-  const [confirmPasswordError, setConfirmPasswordError] = useState(null);
-  const [emailError, setEmailError] = useState(null);
+  const [usernameError, setUsernameError] = useState<string | null>(null);
+  const [passwordError, setPasswordError] = useState<string | null>(null);
+  const [confirmPasswordError, setConfirmPasswordError] = useState<string | null>(null);
+  const [emailError, setEmailError] = useState<string | null>(null);
   const [currentPassword, setCurrentPassword] = useState("");
-  const [currentPasswordError, setCurrentPasswordError] = useState(null);
+  const [currentPasswordError, setCurrentPasswordError] = useState<string | null>(null);
   const {jwt} = useChatStore(state => ({jwt: state.jwt}));
   
   // const handleChangeUsername = (event) => {
@@ -44,25 +44,25 @@ const RegisterPage2: React.FC<Props> = ({ isOpen, onClose, onRegister }) => {
   //   setEmailError(newEmail === '' ? '邮箱不能为空。' : null);
   // }
   
-  const handleChangePassword = (event) => {
+  const handleChangePassword = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newPassword = event.currentTarget.value;
     setPassword(newPassword);
     if (newPassword === '') {
       setPasswordError('密码不能为空。');
     } else if (newPassword.length < 6) {
-      setPasswordError('密码不得少于6位。');
+      setPasswordError('密码不能为空。' );
     } else {
       setPasswordError(null);
     }
   }
 
-  const handleChangeConfirmPassword = (event) => {
+  const handleChangeConfirmPassword = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newConfirmPassword = event.currentTarget.value;
     setConfirmPassword(newConfirmPassword);
     setConfirmPasswordError(newConfirmPassword !== password ? '输入的密码不一致。' : null);
   }
 
-  const handleChangeCurrentPassword = (event) => {
+  const handleChangeCurrentPassword = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newCurrentPassword = event.currentTarget.value;
     setCurrentPassword(newCurrentPassword);
     if (newCurrentPassword === '') {
@@ -106,7 +106,7 @@ const RegisterPage2: React.FC<Props> = ({ isOpen, onClose, onRegister }) => {
           });
 
         }
-      }catch (error) {
+      }catch (error:any) {
         // console.log("==================")
         // console.log(error)
         let errorMsg = '密码修改失败'; 
@@ -124,7 +124,7 @@ const RegisterPage2: React.FC<Props> = ({ isOpen, onClose, onRegister }) => {
 
   const modalStyles = { 
     wrapper: { width: '100%' },
-    modal: {
+    root: {
       maxWidth: '60%',
       top: '50%',
       left: '50%',

@@ -24,18 +24,18 @@ const RegisterPage: React.FC<Props> = ({ isOpen, onClose, onRegister }) => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [email, setEmail] = useState("");
-  const [usernameError, setUsernameError] = useState(null);
-  const [passwordError, setPasswordError] = useState(null);
-  const [confirmPasswordError, setConfirmPasswordError] = useState(null);
-  const [emailError, setEmailError] = useState(null);
+  const [usernameError, setUsernameError] = useState<string | null>(null);
+  const [passwordError, setPasswordError] = useState<string | null>(null);
+  const [confirmPasswordError, setConfirmPasswordError] = useState<string | null>(null);
+  const [emailError, setEmailError] = useState<string | null>(null);
 
-  const handleChangeUsername = (event) => {
+  const handleChangeUsername = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newUsername = event.currentTarget.value;
     setUsername(newUsername);
     setUsernameError(newUsername === '' ? '用户名不能为空。' : null);
   }
 
-  const handleChangeEmail = (event) => {
+  const handleChangeEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newEmail = event.currentTarget.value;
     setEmail(newEmail);
     if (newEmail === '') {
@@ -47,7 +47,7 @@ const RegisterPage: React.FC<Props> = ({ isOpen, onClose, onRegister }) => {
     }
   }
   
-  const handleChangePassword = (event) => {
+  const handleChangePassword = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newPassword = event.currentTarget.value;
     setPassword(newPassword);
     if (newPassword === '') {
@@ -59,7 +59,7 @@ const RegisterPage: React.FC<Props> = ({ isOpen, onClose, onRegister }) => {
     }
   }
 
-  const handleChangeConfirmPassword = (event) => {
+  const handleChangeConfirmPassword = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newConfirmPassword = event.currentTarget.value;
     setConfirmPassword(newConfirmPassword);
     setConfirmPasswordError(newConfirmPassword !== password ? '输入的密码不一致。' : null);
@@ -88,7 +88,7 @@ const RegisterPage: React.FC<Props> = ({ isOpen, onClose, onRegister }) => {
               });
 
             }
-        }catch (error) {
+        }catch (error:any) {
           // console.log("==================")
           // console.log(error)
           let errorMsg = '注册失败'; 
@@ -106,7 +106,7 @@ const RegisterPage: React.FC<Props> = ({ isOpen, onClose, onRegister }) => {
 
   const modalStyles = { 
     wrapper: { width: '100%' },
-    modal: {
+    root: {
       maxWidth: '60%',
       top: '50%',
       left: '50%',

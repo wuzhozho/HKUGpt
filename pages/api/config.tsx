@@ -9,8 +9,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     if (req.method === 'GET') {
         try {
-            // console.log("======================get config:")
-            // console.log(apiUrl)
+            console.log("======================get config:")
+            console.log(apiUrl)
             // console.log(req.body)
             const response = await axios.get(apiUrl, 
                 {
@@ -20,7 +20,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 });
             // console.log("-------------",response)
             return res.status(201).json(response.data);
-        } catch (err) {
+        } catch (err:any) {
             console.error(err);
             return res.status(500).json({ error: "Error in get config." });
         }

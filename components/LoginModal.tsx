@@ -25,20 +25,23 @@ const LoginPage: React.FC<Props> = ({ isOpen, onClose, onLogin }) => {
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [usernameError, setUsernameError] = useState(null);
-  const [passwordError, setPasswordError] = useState(null);
+  // const [usernameError, setUsernameError] = useState<string | null>(null);
+  const [passwordError, setPasswordError] = useState<string | null>(null);
 
-  const handleChangeUsername = (event) => {
+  const [usernameError, setUsernameError] = useState<string | null>(null);
+
+  const handleChangeUsername = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newUsername = event.currentTarget.value;
     setUsername(newUsername);
     setUsernameError(newUsername === '' ? '用户名不能为空。' : null);
-  }
-
-  const handleChangePassword = (event) => {
+  };
+  
+  const handleChangePassword = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newPassword = event.currentTarget.value;
     setPassword(newPassword);
     setPasswordError(newPassword === '' ? '密码不能为空。' : null);
   }
+
 
   const handleLogin = async () => {
     setUsernameError(username === '' ? '用户名不能为空。' : null);
@@ -70,7 +73,7 @@ const LoginPage: React.FC<Props> = ({ isOpen, onClose, onLogin }) => {
           onClose();
           onLogin(user);
         }
-      }catch (error) {
+      }catch (error:any) {
         // console.log("==================")
         // console.log(error)
         let errorMsg = '登录失败'; 
@@ -95,21 +98,16 @@ const fetchConfig = async (jwt:string) => {
     });
     if (response.status === 201) { 
       const config = response.data.data
-      console.log("----------------config:", config)
-      // 这里你可以根据需要对配置信息进行处理
-      // {
-      //   "id": 1,
-      //   "attributes": {
-      //       "model": "gpt-3.5-turbo",
-      //       "OPENAI_KEY": "xxxxx",
-      //       "theme": "light",
-      //       "createdAt": "2024-05-14T12:05:27.221Z",
-      //       "updatedAt": "2024-05-14T12:05:27.221Z"
-      //   }
-      // }
+      console.log("----------------config11:", config)
+      console.log("===-=-=-=-=-newsetting0000",config.attributes.model)
+
       update({
         apiKey: config.attributes.OPENAI_KEY,
-        colorScheme: config.attributes.theme,
+        // colorScheme: config.attributes.theme,
+        // settingsForm: {
+        //   ...config.attributes.settingsForm, // 拷贝之前的设置
+        //   model: config.attributes.model // 设置新的模型值
+        // }
       });
     }
   } catch (error) {
@@ -117,16 +115,16 @@ const fetchConfig = async (jwt:string) => {
   }
 }
 
-  const modalStyles = { 
-    wrapper: { width: '100%' },
-    modal: {
-      maxWidth: '60%',
-      top: '50%',
-      left: '50%',
-      transform: 'translate(-50%, -50%)',
-      padding: '20px'
-    } 
-  };
+const modalStyles = {
+  root: {
+    maxWidth: '60%',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    padding: '20px',
+  },
+  // 根据Mantine文档，确定是否有其他合适的键来替代wrapper，或是完全去除
+};
 
   return (
     <Modal

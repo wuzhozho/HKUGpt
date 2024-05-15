@@ -98,16 +98,15 @@ const fetchConfig = async (jwt:string) => {
     });
     if (response.status === 201) { 
       const config = response.data.data
-      console.log("----------------config11:", config)
-      console.log("===-=-=-=-=-newsetting0000",config.attributes.model)
+      console.log("----------------config:", config)
 
       update({
         apiKey: config.attributes.OPENAI_KEY,
-        // colorScheme: config.attributes.theme,
-        // settingsForm: {
-        //   ...config.attributes.settingsForm, // 拷贝之前的设置
-        //   model: config.attributes.model // 设置新的模型值
-        // }
+        colorScheme: config.attributes.theme,
+        settingsForm: {
+          ...config.attributes.settingsForm, // 拷贝之前的设置
+          model: config.attributes.model // 设置新的模型值
+        }
       });
     }
   } catch (error) {

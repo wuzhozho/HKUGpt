@@ -1,3 +1,8 @@
 {
-    "helloWorld": "Hello, World!"
-  }
+  "plat":"LLM-Chatbot Lab@HKU Business School",
+  "helloWorld": "Hello, World!",
+  "menu-clearchats":"Clear Chats",
+  "menu-clearchats_confirm":"Confirm Clear Chats",
+  "menu-newchat":"New Chat"
+
+}

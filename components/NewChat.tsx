@@ -26,6 +26,7 @@ import tolle from "../public/chars/tolle.png";
 import { useRouter } from "next/router";
 import { addChat, setChosenCharacter } from "@/stores/ChatActions";
 import { submitMessage } from "@/stores/SubmitMessage";
+import { useTranslation } from 'react-i18next';
 
 const scriptBase = ({
   character,
@@ -252,7 +253,8 @@ function CardsCarousel({ children }: { children: React.ReactNode }) {
 
 export default function NewChatCarousel() {
   const router = useRouter();
-
+  const { t, i18n } = useTranslation();
+  
   return (
     <Container py="xl">
       <div
@@ -264,7 +266,7 @@ export default function NewChatCarousel() {
           textAlign: "center",
         }}
       >
-        <h2> 港大-商学院-LLM-Chatbot实验平台</h2>
+        <h2> {t('plat')}</h2>
         <IconArrowDown style={{ marginLeft: "0.5rem" }} />
       </div>
     </Container>

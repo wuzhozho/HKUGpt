@@ -24,6 +24,7 @@ import LoginPage from "@/components/LoginModal";
 import RegisterPage from "@/components/RegisterModal";
 import RegisterPage2 from "@/components/Register2Modal";
 import React, { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = createStyles((theme) => ({
   inner: {
@@ -99,6 +100,8 @@ export default function MuHeader({ children }: any) {
   const { classes, theme } = useStyles();
   const chats = useChatStore((state) => state.chats);
   const router = useRouter();
+  const { t, i18n } = useTranslation();
+  const language = useChatStore((state) => state.lan);
   const activeChatId = router.query.chatId as string | undefined;
 
   const activeChat = chats.find((chat) => chat.id === activeChatId);
@@ -119,7 +122,10 @@ export default function MuHeader({ children }: any) {
       setIsLoggedIn(true);
       setLoginOpen(false); // 根据你的逻辑，当用户已登录时不显示登录窗口
     }
-  }, []);
+    if (language) {
+      i18n.changeLanguage(language); // 根据全局状态改变语言
+    }
+  }, [language, i18n]);
   // 登陆，注册相关
   const [loginOpen, setLoginOpen] = useState(false);
   const [registerOpen, setRegisterOpen] = useState(false);
@@ -176,7 +182,7 @@ export default function MuHeader({ children }: any) {
                 </MediaQuery>
               </>
             ) : null}
-            港大-商学院-LLM-Chatbot实验平台
+            {t('plat')}
             <Text size="sm">{modelInfo.displayName}</Text>
             {isKnownModel && (
               <> 

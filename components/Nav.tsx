@@ -16,7 +16,9 @@ import {
   px,
   rem,
   useMantineColorScheme,
+  Select
 } from "@mantine/core";
+
 import { upperFirst, useDisclosure, useMediaQuery } from "@mantine/hooks";
 import {
   IconArrowRight,
@@ -37,6 +39,7 @@ import {
   clearChats,
   deleteChat,
   setNavOpened,
+  update,
   updateChat,
 } from "@/stores/ChatActions";
 
@@ -153,6 +156,23 @@ export default function NavbarSimple() {
   const Icon = colorScheme === "dark" ? IconSun : IconMoon;
 
   const isSmall = useMediaQuery(`(max-width: ${theme.breakpoints.sm})`);
+
+  // 语言选项
+  const languageOptions = [
+    { value: 'zh-CN', label: '简体中文' },
+    { value: 'zh-TW', label: '繁体中文' },
+    { value: 'en', label: 'English' },
+  ];
+
+  // 获取和设置语言的状态变量方法
+  const language = useChatStore((state) => state.lan);
+  console.log('--------------------lan=',language)
+
+  // 处理语言变更的函数
+  const handleLanguageChange = (language:string) => {
+    useChatStore.setState({ lan: language });
+    // 这里根据实际情况触发语言文件的变更
+  };
 
   const links = chats.map((chat) => (
     <Group
@@ -385,6 +405,19 @@ export default function NavbarSimple() {
           }}
         />
       </Modal>
+      {/* 语言选择下拉框部分 */}
+      <Navbar.Section className={classes.footer}>
+        
+        <Select
+          data={languageOptions}
+          value={language}
+          onChange={handleLanguageChange}
+          placeholder="Select Language"
+          size="sm"
+          defaultValue='en'
+          sx={{ width: '100%', textAlign: 'left' }} // 调整宽度和文字对齐方式
+        />
+      </Navbar.Section>
     </Navbar>
   );
 }

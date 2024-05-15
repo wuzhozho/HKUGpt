@@ -1,3 +1,7 @@
 {
-    "helloWorld": "你好，世界"
+    "plat":"港大-商学院-LLM-Chatbot实验平台",
+    "helloWorld": "你好，世界",
+    "menu-clearchats":"清除所有对话",
+    "menu-clearchats_confirm":"确认清除所有对话",
+    "menu-newchat":"新建对话"
 }

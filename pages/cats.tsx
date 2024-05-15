@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import axios from 'axios';
 import styles from '../styles/cats.module.css'
 import { Button, Modal } from '@mantine/core';
@@ -13,11 +13,8 @@ const CatsPage = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [catToDelete, setCatToDelete] = useState(null);
 
-    useEffect(() => {
-        loadCats();
-    }, []);
-
-    const loadCats = async () => {
+    // 使用 useCallback 包裹 loadCats 函数
+    const loadCats = useCallback(async () => {
         try {
             const response = await axios.get('/api/cats');
             console.log("================",response)
@@ -26,7 +23,12 @@ const CatsPage = () => {
         } catch (err) {
             console.error(err);
         }
-    };
+    }, []); // 如果内部没有依赖除了状态和props之外的东西，依赖项数组可以为空
+
+    // 更新 useEffect，添加 loadCats 作为依赖项
+    useEffect(() => {
+        loadCats();
+    }, [loadCats]); // 现在 useEffect 会在 loadCats 函数变化时触发
 
     const createCat = async () => {
         try {console.log("=========",selectedCat)

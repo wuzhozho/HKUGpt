@@ -42,7 +42,7 @@ export const submitMessage = async (message: Message) => {
       "user_id": user?.id,
       "user_name": user?.username,
       "log": message.content,
-      "qa": false,
+      "qa": 'Q',
       "chat_id": chat.id,
     }
     const header = {
@@ -155,7 +155,7 @@ export const submitMessage = async (message: Message) => {
         "user_id": user?.id,
         "user_name": user?.username,
         "log": fullResponse,
-        "qa": true,
+        "qa": 'A',
         "chat_id": chat.id,
       }
       const header = {

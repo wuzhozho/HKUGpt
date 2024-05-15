@@ -11,7 +11,6 @@ const useStyles = createStyles((theme) => ({
     backgroundColor: theme.colors.dark[6], // 使用了指定的背景色
     // 其他需要的样式，如边距、字体颜色、圆角等
   },
-  // 可能还有其他样式定义...
 }));
 
 type Props = { 
@@ -21,6 +20,7 @@ type Props = {
 };
 
 const LoginPage: React.FC<Props> = ({ isOpen, onClose, onLogin }) => {
+  
   const { classes } = useStyles();
 
   const [username, setUsername] = useState("");
@@ -115,16 +115,6 @@ const fetchConfig = async (jwt:string) => {
   }
 }
 
-const modalStyles = {
-  root: {
-    maxWidth: '60%',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    padding: '20px',
-  },
-  // 根据Mantine文档，确定是否有其他合适的键来替代wrapper，或是完全去除
-};
 
   return (
     <Modal
@@ -132,7 +122,6 @@ const modalStyles = {
       onClose={onClose}
       title="登录"
       size="lg"
-      styles={modalStyles}
     >
       <div style={{ marginBottom: '20px' }}>
         <TextInput 

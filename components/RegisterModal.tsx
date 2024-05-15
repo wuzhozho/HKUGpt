@@ -104,24 +104,12 @@ const RegisterPage: React.FC<Props> = ({ isOpen, onClose, onRegister }) => {
     }
   };
 
-  const modalStyles = { 
-    wrapper: { width: '100%' },
-    root: {
-      maxWidth: '60%',
-      top: '50%',
-      left: '50%',
-      transform: 'translate(-50%, -50%)',
-      padding: '20px'
-    } 
-  };
-
   return (
     <Modal
       opened={isOpen}
       onClose={onClose}
       title="注册"
       size="lg"
-      styles={modalStyles}
     >
       <div style={{ marginBottom: '20px' }}>
         <TextInput 

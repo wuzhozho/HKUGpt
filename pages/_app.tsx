@@ -16,6 +16,7 @@ import { useEffect, useState } from "react";
 import UIController from "@/components/UIController";
 import { setColorScheme } from "@/stores/ChatActions";
 import AudioPlayer from "@/components/AudioPlayer";
+import './i18n';
 
 export default function App(props: AppProps) {
   const { Component, pageProps } = props;

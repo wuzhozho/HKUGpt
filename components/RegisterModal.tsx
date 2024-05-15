@@ -82,7 +82,7 @@ const RegisterPage: React.FC<Props> = ({ isOpen, onClose, onRegister }) => {
               // console.log(response)
 
               showNotification({
-                title: '成功',
+                title: 'success',
                 message: '注册成功!',
                 color: 'teal',
               });
@@ -94,7 +94,7 @@ const RegisterPage: React.FC<Props> = ({ isOpen, onClose, onRegister }) => {
           let errorMsg = '注册失败'; 
           
           showNotification({
-            title: '出错了',
+            title: 'fail',
             message: errorMsg+": " + error.response.data.error,
             color: 'red', 
           });

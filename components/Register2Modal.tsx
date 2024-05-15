@@ -100,7 +100,7 @@ const RegisterPage2: React.FC<Props> = ({ isOpen, onClose, onRegister }) => {
           console.log(response)
 
           showNotification({
-            title: '成功',
+            title: 'success',
             message: '密码修改成功!',
             color: 'teal',
           });
@@ -112,7 +112,7 @@ const RegisterPage2: React.FC<Props> = ({ isOpen, onClose, onRegister }) => {
         let errorMsg = '密码修改失败'; 
         
         showNotification({
-          title: '出错了',
+          title: 'fail',
           message: errorMsg+": " + error.response.data.error,
           color: 'red', 
         });
@@ -157,7 +157,7 @@ const RegisterPage2: React.FC<Props> = ({ isOpen, onClose, onRegister }) => {
       </div>
       <div style={{ marginBottom: '20px' }}>
         <TextInput 
-          placeholder="密码"
+          placeholder="新密码"
           type="password"
           value={password}
           onChange={handleChangePassword}

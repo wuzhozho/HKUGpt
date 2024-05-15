@@ -21,7 +21,8 @@ if (!i18n.isInitialized) {
         },
         backend: {
             // 这里使用绝对 URL
-            loadPath: `${baseUrl}/locales/{{lng}}/translation.json`
+            // loadPath: `${baseUrl}/locales/{{lng}}/translation.json`
+            loadPath: `/locales/{{lng}}/translation.json`
         },
     });
 }

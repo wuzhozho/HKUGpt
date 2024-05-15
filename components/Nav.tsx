@@ -30,7 +30,7 @@ import {
   IconSun,
   IconTrash,
 } from "@tabler/icons-react";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import ClearChatsButton from "./ClearChatsButton";
 import KeyModal from "./KeyModal";
 import SettingsModal from "./SettingsModal";
@@ -42,6 +42,8 @@ import {
   update,
   updateChat,
 } from "@/stores/ChatActions";
+import { t } from "i18next";
+import { useTranslation } from 'react-i18next';
 
 const useStyles = createStyles((theme) => ({
   header: {
@@ -158,6 +160,7 @@ export default function NavbarSimple() {
   const isSmall = useMediaQuery(`(max-width: ${theme.breakpoints.sm})`);
 
   // 语言选项
+  const { t, i18n } = useTranslation();
   const languageOptions = [
     { value: 'zh-CN', label: '简体中文' },
     { value: 'zh-TW', label: '繁体中文' },
@@ -271,6 +274,11 @@ export default function NavbarSimple() {
     closeTitleModal();
   };
   const editTitleInputRef = useRef<HTMLInputElement>(null);
+  useEffect(() => {
+    if (language) {
+      i18n.changeLanguage(language); // 根据全局状态改变语言
+    }
+  }, [language, i18n]);
 
   return (
     <Navbar
@@ -292,7 +300,7 @@ export default function NavbarSimple() {
             }}
           >
             <IconPlus className={classes.linkIcon} stroke={1.5} />
-            <span>New Chat</span>
+            <span>{t('menu-newchat')}</span>
             <MediaQuery largerThan="sm" styles={{ display: "none" }}>
               <Burger
                 opened={navOpened}

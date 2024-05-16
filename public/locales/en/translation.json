@@ -25,5 +25,8 @@
   "user-reg-success": "Registration Successful",
   "user-reg-fail": "Registration Failed",
   "user-pwd-success": "Password Successfully Changed",
-  "user-pwd-fail": "Password Change Failed"
+  "user-pwd-fail": "Password Change Failed",
+  "user-quit-yesno": "Are you sure you want to log out?",
+  "confirm":"Confirm",
+  "cancel": "Cancel"
 }

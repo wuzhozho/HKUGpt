@@ -25,6 +25,8 @@
     "user-reg-success":"注册成功",
     "user-reg-fail":"注册失败",
     "user-pwd-success":"密码修改成功",
-    "user-pwd-fail":"密码修改失败"
-
+    "user-pwd-fail":"密码修改失败",
+    "user-quit-yesno":"你确定要退出登录吗？",
+    "confirm":"确认",
+    "cancel":"取消"
 }

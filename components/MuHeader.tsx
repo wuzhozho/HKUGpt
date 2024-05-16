@@ -261,17 +261,17 @@ export default function MuHeader({ children }: any) {
       />
 
       <Modal
-        title="确认退出？"
+        title={t('user-logout')}
         opened={confirmLogoutOpen}
         onClose={() => setConfirmLogoutOpen(false)}
       >
-        <p>你确定要退出登录吗？</p>
+        <p>{t('user-quit-yesno')}</p>
         <Group position="right" spacing="md">
           <Button variant="default" onClick={() => setConfirmLogoutOpen(false)}>
-            取消
+            {t('cancel')}
           </Button>
           <Button color="red" onClick={handleLogout}>
-            确认退出
+            {t('confirm')}
           </Button>
         </Group>
       </Modal>

@@ -9,7 +9,7 @@
     "user-email":"邮箱",
     "user-pwd-old":"旧密码",
     "user-pwd-new":"新密码",
-    "user-confirm-pwd":"确认密码",
+    "user-pwd-confirm":"确认密码",
     "user-reg":"注册",
     "user-login":"登录",
     "user-logout":"登出",

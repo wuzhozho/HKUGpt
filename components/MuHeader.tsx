@@ -216,26 +216,26 @@ export default function MuHeader({ children }: any) {
           
           <Group spacing={0} className={classes.social} position="right" noWrap>
             {isLoggedIn ? (
-              <> <div>{username || "用户"}</div> 
-                <a style={{ marginRight: "10px",cursor: 'pointer' ,paddingLeft: '12px',paddingRight: '12px'  }} 
+              <> <div>{username}</div> 
+                <a style={{ marginRight: "10px",cursor: 'pointer' ,paddingLeft: '20px',paddingRight: '20px'  }} 
                 onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#F3F4F5'} 
                 onMouseOut={(e) => e.currentTarget.style.backgroundColor = 'transparent'} 
-                onClick={() => setRegister2Open(true)}>修改密码</a> |
-                <a style={{ margin: "0 10px",cursor: 'pointer',paddingLeft: '12px',paddingRight: '12px' }} 
+                onClick={() => setRegister2Open(true)}>{t('user-changepwd')}</a> |
+                <a style={{ margin: "0 10px",cursor: 'pointer',paddingLeft: '20px',paddingRight: '20px' }} 
                 onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#F3F4F5'} 
                 onMouseOut={(e) => e.currentTarget.style.backgroundColor = 'transparent'} 
-                onClick={() => setConfirmLogoutOpen(true)}>退出</a>
+                onClick={() => setConfirmLogoutOpen(true)}>{t('user-logout')}</a>
               </>
             ) : (
               <>
                 <a style={{ marginRight: "10px",cursor: 'pointer' ,paddingLeft: '12px',paddingRight: '12px'  }} 
                 onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#F3F4F5'} 
                 onMouseOut={(e) => e.currentTarget.style.backgroundColor = 'transparent'} 
-                onClick={() => setLoginOpen(true)}>登录</a> |
+                onClick={() => setLoginOpen(true)}>{t('user-login')}</a> |
                 <a style={{ marginLeft: "10px",cursor: 'pointer' ,paddingLeft: '12px',paddingRight: '12px'  }} 
                 onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#F3F4F5'} 
                 onMouseOut={(e) => e.currentTarget.style.backgroundColor = 'transparent'} 
-                onClick={() => setRegisterOpen(true)}>注册</a>
+                onClick={() => setRegisterOpen(true)}>{t('user-reg')}</a>
               </>
             )}
           </Group>

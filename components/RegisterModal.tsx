@@ -142,7 +142,7 @@ const RegisterPage: React.FC<Props> = ({ isOpen, onClose, onRegister }) => {
       </div>
       <div style={{ marginBottom: '20px' }}>
         <TextInput 
-          placeholder={t('user-confirm-pwd')}
+          placeholder={t('user-pwd-confirm')}
           type="password"
           value={confirmPassword}
           onChange={handleChangeConfirmPassword}

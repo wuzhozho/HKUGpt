@@ -9,7 +9,7 @@
   "user-email": "Email",
   "user-pwd-old": "Old Password",
   "user-pwd-new": "New Password",
-  "user-confirm-pwd": "Confirm Password",
+  "user-pwd-confirm": "Confirm Password",
   "user-reg": "Register",
   "user-login": "Log In",
   "user-logout": "Log Out",

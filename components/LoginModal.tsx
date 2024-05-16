@@ -116,6 +116,12 @@ const fetchConfig = async (jwt:string) => {
   }
 }
 
+useEffect(() => {
+  // 每当语言改变时，重置校验错误消息
+  setUsernameError(username === '' ? t('user-check-usernotempty') : null);
+  setPasswordError(password === '' ? t('user-check-pwdnotempty') : null);
+}, [t, username, password]);
+
   return (
     <Modal
       opened={isOpen}

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { TextInput, Button, Modal, Notification } from "@mantine/core";
 import { createStyles } from "@mantine/core";
 import axios from 'axios';
@@ -107,6 +107,20 @@ const RegisterPage: React.FC<Props> = ({ isOpen, onClose, onRegister }) => {
     }
   };
 
+  useEffect(() => {
+    setUsernameError(username === '' ? t('user-check-usernotempty') : null);
+    setEmailError(email === ''
+        ? t('user-check-emailnotempty')
+        : (!/^\S+@\S+\.\S+$/.test(email) ? t('user-check-emailvalidator') : null)
+    );
+    setPasswordError(password === ''
+        ? t('user-check-pwdnotempty')
+        : (password.length < 6 ? t('user-check-pwdmin6') : null)
+    );
+    setConfirmPasswordError(confirmPassword !== password ? t('user-check-pwdnotsame') : null);
+  }, [t, username, email, password, confirmPassword]);
+  
+  
   return (
     <Modal
       opened={isOpen}

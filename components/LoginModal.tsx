@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { TextInput, Button, Modal, Notification } from "@mantine/core";
 import { createStyles } from "@mantine/core";
 import axios from 'axios';
 import { showNotification } from '@mantine/notifications';
 import { useChatStore } from "../stores/ChatStore";
 import { update } from "@/stores/ChatActions";
+import { useTranslation } from 'react-i18next';
 
 const useStyles = createStyles((theme) => ({
   loginRegisterButton: {
@@ -22,6 +23,7 @@ type Props = {
 const LoginPage: React.FC<Props> = ({ isOpen, onClose, onLogin }) => {
   
   const { classes } = useStyles();
+  const { t } = useTranslation();
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -33,19 +35,19 @@ const LoginPage: React.FC<Props> = ({ isOpen, onClose, onLogin }) => {
   const handleChangeUsername = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newUsername = event.currentTarget.value;
     setUsername(newUsername);
-    setUsernameError(newUsername === '' ? '用户名不能为空。' : null);
+    setUsernameError(newUsername === '' ? t('user-check-usernotempty') : null);
   };
   
   const handleChangePassword = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newPassword = event.currentTarget.value;
     setPassword(newPassword);
-    setPasswordError(newPassword === '' ? '密码不能为空。' : null);
+    setPasswordError(newPassword === '' ? t('user-check-pwdnotempty') : null);
   }
 
 
   const handleLogin = async () => {
-    setUsernameError(username === '' ? '用户名不能为空。' : null);
-    setPasswordError(password === '' ? '密码不能为空。' : null);
+    setUsernameError(username === '' ? t('user-check-usernotempty') : null);
+    setPasswordError(password === '' ? t('user-check-pwdnotempty') : null);
 
     if(username !== '' && password !== '') {
       const data = {identifier: `${username}`, password: `${password}`}
@@ -64,8 +66,8 @@ const LoginPage: React.FC<Props> = ({ isOpen, onClose, onLogin }) => {
           // 存储到全局状态
           useChatStore.setState({ jwt: jwt, user: user });
           showNotification({
-            title: '成功',
-            message: '登录成功!',
+            title: 'success',
+            message: t('user-login-success'),
             color: 'teal',
           });
           // 取配置信息
@@ -76,10 +78,10 @@ const LoginPage: React.FC<Props> = ({ isOpen, onClose, onLogin }) => {
       }catch (error:any) {
         // console.log("==================")
         // console.log(error)
-        let errorMsg = '登录失败'; 
+        let errorMsg = t('user-login-fail'); 
 
         showNotification({
-          title: '出错了',
+          title: 'fail',
           message: errorMsg+": " + error.response.data.error,
           color: 'red', 
         });
@@ -114,17 +116,16 @@ const fetchConfig = async (jwt:string) => {
   }
 }
 
-
   return (
     <Modal
       opened={isOpen}
       onClose={onClose}
-      title="登录"
+      title={t('user-login')}
       size="lg"
     >
       <div style={{ marginBottom: '20px' }}>
         <TextInput 
-          placeholder="用户名" 
+          placeholder={t('user-username')}
           value={username}
           onChange={handleChangeUsername}
         />
@@ -132,14 +133,14 @@ const fetchConfig = async (jwt:string) => {
       </div>
       <div style={{ marginBottom: '20px' }}>
         <TextInput 
-          placeholder="密码"
+          placeholder={t('user-password')}
           type="password"
           value={password}
           onChange={handleChangePassword}
         />
         {passwordError && <Notification title={passwordError} color="red" />}
       </div>
-      <Button  className={classes.loginRegisterButton} onClick={handleLogin} color="violet">登录</Button>
+      <Button  className={classes.loginRegisterButton} onClick={handleLogin} color="violet">{t('user-login')}</Button>
     </Modal>
   );
 };

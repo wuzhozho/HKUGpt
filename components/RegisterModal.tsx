@@ -3,6 +3,7 @@ import { TextInput, Button, Modal, Notification } from "@mantine/core";
 import { createStyles } from "@mantine/core";
 import axios from 'axios';
 import { showNotification } from '@mantine/notifications';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = createStyles((theme) => ({
   loginRegisterButton: {
@@ -20,6 +21,8 @@ type Props = {
 
 const RegisterPage: React.FC<Props> = ({ isOpen, onClose, onRegister }) => {
   const { classes } = useStyles();
+  const { t } = useTranslation();
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -32,16 +35,16 @@ const RegisterPage: React.FC<Props> = ({ isOpen, onClose, onRegister }) => {
   const handleChangeUsername = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newUsername = event.currentTarget.value;
     setUsername(newUsername);
-    setUsernameError(newUsername === '' ? '用户名不能为空。' : null);
+    setUsernameError(newUsername === '' ? t('user-check-usernotempty') : null);
   }
 
   const handleChangeEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newEmail = event.currentTarget.value;
     setEmail(newEmail);
     if (newEmail === '') {
-      setEmailError('邮箱不能为空。');
+      setEmailError(t('user-check-emailnotempty'));
     } else if (!/^\S+@\S+\.\S+$/.test(newEmail)) {
-      setEmailError('请输入有效的邮箱地址。')
+      setEmailError(t('user-check-emailvalidator'))
     } else {
       setEmailError(null);
     }
@@ -51,9 +54,9 @@ const RegisterPage: React.FC<Props> = ({ isOpen, onClose, onRegister }) => {
     const newPassword = event.currentTarget.value;
     setPassword(newPassword);
     if (newPassword === '') {
-      setPasswordError('密码不能为空。');
+      setPasswordError(t('user-check-pwdnotempty'));
     } else if (newPassword.length < 6) {
-      setPasswordError('密码不得少于6位。');
+      setPasswordError(t('user-check-pwdmin6'));
     } else {
       setPasswordError(null);
     }
@@ -62,14 +65,14 @@ const RegisterPage: React.FC<Props> = ({ isOpen, onClose, onRegister }) => {
   const handleChangeConfirmPassword = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newConfirmPassword = event.currentTarget.value;
     setConfirmPassword(newConfirmPassword);
-    setConfirmPasswordError(newConfirmPassword !== password ? '输入的密码不一致。' : null);
+    setConfirmPasswordError(newConfirmPassword !== password ? t('user-check-pwdnotsame') : null);
   }
 
   const  handleRegister = async () => {
-    setUsernameError(username === '' ? '用户名不能为空。' : null);
-    setEmailError(email === '' ? '邮箱不能为空。' : null);
-    setPasswordError(password === '' ? '密码不能为空。' : null);
-    setConfirmPasswordError(password !== confirmPassword ? '输入的密码不一致。' : null);
+    setUsernameError(username === '' ? t('user-check-usernotempty') : null);
+    setEmailError(email === '' ? t('user-check-pwdnotempty') : null);
+    setPasswordError(password === '' ? t('user-check-emailnotempty') : null);
+    setConfirmPasswordError(password !== confirmPassword ? t('user-check-pwdnotsame') : null);
 
     if(username !== '' && password !== '' && email !== '' && password === confirmPassword) {
       const data = {username: `${username}`, password: `${password}`, email: `${email}`}
@@ -83,7 +86,7 @@ const RegisterPage: React.FC<Props> = ({ isOpen, onClose, onRegister }) => {
 
               showNotification({
                 title: 'success',
-                message: '注册成功!',
+                message: t('user-reg-success'),
                 color: 'teal',
               });
 
@@ -91,7 +94,7 @@ const RegisterPage: React.FC<Props> = ({ isOpen, onClose, onRegister }) => {
         }catch (error:any) {
           // console.log("==================")
           // console.log(error)
-          let errorMsg = '注册失败'; 
+          let errorMsg = t('user-reg-fail'); 
           
           showNotification({
             title: 'fail',
@@ -108,12 +111,12 @@ const RegisterPage: React.FC<Props> = ({ isOpen, onClose, onRegister }) => {
     <Modal
       opened={isOpen}
       onClose={onClose}
-      title="注册"
+      title={t('user-reg')}
       size="lg"
     >
       <div style={{ marginBottom: '20px' }}>
         <TextInput 
-          placeholder="用户名" 
+          placeholder={t('user-username')}
           value={username}
           onChange={handleChangeUsername}
         />
@@ -122,7 +125,7 @@ const RegisterPage: React.FC<Props> = ({ isOpen, onClose, onRegister }) => {
       <div style={{ marginBottom: '20px' }}>
         <TextInput 
           type="email"
-          placeholder="邮箱" 
+          placeholder={t('user-email')}
           value={email}
           onChange={handleChangeEmail}
         />
@@ -130,7 +133,7 @@ const RegisterPage: React.FC<Props> = ({ isOpen, onClose, onRegister }) => {
       </div>
       <div style={{ marginBottom: '20px' }}>
         <TextInput 
-          placeholder="密码"
+          placeholder={t('user-password')}
           type="password"
           value={password}
           onChange={handleChangePassword}
@@ -139,14 +142,14 @@ const RegisterPage: React.FC<Props> = ({ isOpen, onClose, onRegister }) => {
       </div>
       <div style={{ marginBottom: '20px' }}>
         <TextInput 
-          placeholder="确认密码"
+          placeholder={t('user-confirm-pwd')}
           type="password"
           value={confirmPassword}
           onChange={handleChangeConfirmPassword}
         />
         {confirmPasswordError && <Notification title={confirmPasswordError} color="red" />}
       </div>
-      <Button className={classes.loginRegisterButton} onClick={handleRegister} color="violet">注册</Button>
+      <Button className={classes.loginRegisterButton} onClick={handleRegister} color="violet">{t('user-reg')}</Button>
     </Modal>
   );
 };

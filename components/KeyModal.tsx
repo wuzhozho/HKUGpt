@@ -149,7 +149,7 @@ export default function KeyModal({ close }: { close: () => void }) {
             <Tabs.Tab value="openai" icon={<IconRobot size={px("0.8rem")} />}>
               OpenAI
             </Tabs.Tab>
-            <Tabs.Tab
+            {/* <Tabs.Tab
               value="azure"
               icon={<IconBrandWindows size={px("0.8rem")} />}
             >
@@ -157,7 +157,7 @@ export default function KeyModal({ close }: { close: () => void }) {
             </Tabs.Tab>
             <Tabs.Tab value="11labs" icon={<IconVolume size={px("0.8rem")} />}>
               Eleven Labs
-            </Tabs.Tab>
+            </Tabs.Tab> */}
           </Tabs.List>
 
           <Tabs.Panel value="openai" pt="xs">
@@ -168,21 +168,21 @@ export default function KeyModal({ close }: { close: () => void }) {
               descriptionAboveInput="You need an OpenAI API Key. Your API Key is stored locally on your browser and never sent anywhere else."
               descriptionBelowInput={
                 <p>
-                  → Get your API key from the{" "}
+                  {/* → Get your API key from the{" "}
                   <a
                     target="_blank"
                     href="https://platform.openai.com/account/api-keys"
                   >
                     OpenAI dashboard
                   </a>
-                  .
+                  . */}
                 </p>
               }
               validateKey={testKeyOpenAI}
               closeModal={close}
             />
           </Tabs.Panel>
-          <Tabs.Panel value="azure" pt="xs">
+          {/* <Tabs.Panel value="azure" pt="xs">
             <APIPanel
               name="Enter Your Azure Speech API Key"
               initialKey={apiKeyAzure}
@@ -226,7 +226,7 @@ export default function KeyModal({ close }: { close: () => void }) {
               validateKey={testKey11Labs}
               closeModal={close}
             />
-          </Tabs.Panel>
+          </Tabs.Panel> */}
         </Tabs>
       </Box>
     </div>

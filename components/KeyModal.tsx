@@ -165,6 +165,7 @@ export default function KeyModal({ close }: { close: () => void }) {
               name="Enter Your OpenAI API Key"
               initialKey={apiKeyOpenAI}
               setKeyFun={setApiKeyOpenAI}
+              descriptionAboveInput=""
               // descriptionAboveInput="You need an OpenAI API Key. Your API Key is stored locally on your browser and never sent anywhere else."
               descriptionBelowInput={
                 <p>

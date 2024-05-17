@@ -219,11 +219,11 @@ export default function MuHeader({ children }: any) {
           <Group spacing={0} className={classes.social} position="right" noWrap>
             {isLoggedIn ? (
               <> <div>{username}</div> 
-                <a style={{ marginRight: "10px",cursor: 'pointer' ,paddingLeft: '20px',paddingRight: '20px'  }} 
+                {/* <a style={{ marginRight: "10px",cursor: 'pointer' ,paddingLeft: '20px',paddingRight: '20px'  }} 
                 onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#F3F4F5'} 
                 onMouseOut={(e) => e.currentTarget.style.backgroundColor = 'transparent'} 
-                onClick={() => setRegister2Open(true)}>{t('user-changepwd')}</a> |
-                <a style={{ margin: "0 10px",cursor: 'pointer',paddingLeft: '20px',paddingRight: '20px' }} 
+                onClick={() => setRegister2Open(true)}>{t('user-changepwd')}</a> | */}
+                <a style={{ margin: "0 10px",cursor: 'pointer',paddingLeft: '20px',paddingRight: '25px' }} 
                 onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#F3F4F5'} 
                 onMouseOut={(e) => e.currentTarget.style.backgroundColor = 'transparent'} 
                 onClick={() => setConfirmLogoutOpen(true)}>{t('user-logout')}</a>

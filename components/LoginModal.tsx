@@ -103,7 +103,8 @@ const fetchConfig = async (jwt:string) => {
       console.log("----------------config:", config)
 
       update({
-        apiKey: config.attributes.OPENAI_KEY,
+        // 前端配置key，后端不再更新key
+        // apiKey: config.attributes.OPENAI_KEY,
         colorScheme: config.attributes.theme,
         settingsForm: {
           ...config.attributes.settingsForm, // 拷贝之前的设置

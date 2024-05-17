@@ -38,19 +38,21 @@ export const submitMessage = async (message: Message) => {
   // console.log("请求的信息request：", message);
   // question 信息入库
   try {
-    const data =  {
-      "user_id": user?.id,
-      "user_name": user?.username,
-      "log": message.content,
-      "qa": 'Q',
-      "chat_id": chat.id,
-    }
-    const header = {
-      headers: {
-        Authorization: 'Bearer ' + jwt,
-      },
-    }
-    const response = await axios.post('/api/openai_log', data , header);
+    if(user && user.id){
+        const data =  {
+          "user_id": user?.id,
+          "user_name": user?.username,
+          "log": message.content,
+          "qa": 'Q',
+          "chat_id": chat.id,
+        }
+        const header = {
+          headers: {
+            Authorization: 'Bearer ' + jwt,
+          },
+        }
+        const response = await axios.post('/api/openai_log', data , header);
+      }
     }catch (error) {
       console.log("==================question error",error)
     }
@@ -151,19 +153,21 @@ export const submitMessage = async (message: Message) => {
       // console.log("整个OpenAI返回的响应内容为response：", fullResponse); // 打印完整的响应内容
       // answer 信息入库
     try {
-      const data =  {
-        "user_id": user?.id,
-        "user_name": user?.username,
-        "log": fullResponse,
-        "qa": 'A',
-        "chat_id": chat.id,
-      }
-      const header = {
-        headers: {
-          Authorization: 'Bearer ' + jwt,
-        },
-      }
-      const response = await axios.post('/api/openai_log', data , header);
+      if(user && user.id){
+          const data =  {
+            "user_id": user?.id,
+            "user_name": user?.username,
+            "log": fullResponse,
+            "qa": 'A',
+            "chat_id": chat.id,
+          }
+          const header = {
+            headers: {
+              Authorization: 'Bearer ' + jwt,
+            },
+          }
+          const response = await axios.post('/api/openai_log', data , header);
+        }
       }catch (error) {
         console.log("==================answer error",error)
       }

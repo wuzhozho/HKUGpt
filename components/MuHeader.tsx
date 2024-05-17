@@ -186,14 +186,14 @@ export default function MuHeader({ children }: any) {
             ) : null}
             {t('plat')}
             <Text size="sm">{modelInfo.displayName}</Text>
-            {isKnownModel && (
+            {/* {isKnownModel && (
               <> 
                 <Divider size="xs" orientation="vertical" />
                 <Text size="sm">
                   ${(activeChat?.costIncurred || 0).toFixed(2)}
                 </Text>
               </>
-            )}
+            )} */}
           </Group>
         </MediaQuery>
 

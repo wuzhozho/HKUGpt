@@ -155,7 +155,7 @@ export async function streamCompletion(
 
   const successCallback = (res: IncomingMessage) => {
     res.on("data", (chunk) => {
-      console.log("-------------------chunk-",chunk)
+      console.log("-------------------chunk-",chunk.toString())
       if (abortController?.signal.aborted) {
         res.destroy();
         endCallback?.(0, 0);
@@ -164,11 +164,11 @@ export async function streamCompletion(
 
       // Split response into individual messages
       const allMessages = chunk.toString().split("\n\n");
-      // console.log("--------------------",allMessages)
+      console.log("--------------------",allMessages)
       for (const message of allMessages) {
         // Remove first 5 characters ("data:") of response
         const cleaned = message.toString().trim().slice(5);
-        // console.log("-------cleaned,",cleaned);
+        console.log("-------cleaned,",cleaned);
 
         if (!cleaned || cleaned === " [DONE]") {
           return;

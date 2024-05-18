@@ -5,6 +5,9 @@ import { Message, truncateMessages, countTokens } from "./Message";
 import { getModelInfo } from "./Model";
 import axios from "axios";
 
+const baseUrl = process.env.NEXT_PUBLIC_OPENAI_BASE_URL || 'https://api.openai.com';
+// console.log(process.env);
+console.log("=================NEXT_PUBLIC_OPENAI_BASE_URL,",baseUrl)
 export function assertIsError(e: any): asserts e is Error {
   if (!(e instanceof Error)) {
     throw new Error("Not an error");
@@ -29,7 +32,7 @@ async function fetchFromAPI(endpoint: string, key: string) {
 
 export async function testKey(key: string): Promise<boolean> {
   try {
-    const res = await fetchFromAPI("https://api.openai.com/v1/models", key);
+    const res = await fetchFromAPI(`${baseUrl}/v1/models`, key);
     return res.status === 200;
   } catch (e) {
     if (axios.isAxiosError(e)) {
@@ -43,7 +46,7 @@ export async function testKey(key: string): Promise<boolean> {
 
 export async function fetchModels(key: string): Promise<string[]> {
   try {
-    const res = await fetchFromAPI("https://api.openai.com/v1/models", key);
+    const res = await fetchFromAPI(`${baseUrl}/v1/models`, key);
     return res.data.data.map((model: any) => model.id);
   } catch (e) {
     return [];
@@ -59,7 +62,7 @@ export async function _streamCompletion(
 ) {
   const req = https.request(
     {
-      hostname: "api.openai.com",
+      hostname: new URL(baseUrl).hostname,
       port: 443,
       path: "/v1/chat/completions",
       method: "POST",
@@ -160,6 +163,7 @@ export async function streamCompletion(
 
       // Split response into individual messages
       const allMessages = chunk.toString().split("\n\n");
+      // console.log("--------------------",allMessages)
       for (const message of allMessages) {
         // Remove first 5 characters ("data:") of response
         const cleaned = message.toString().trim().slice(5);
@@ -170,6 +174,7 @@ export async function streamCompletion(
 
         let parsed;
         try {
+          // console.log("-------cleaned,",cleaned);
           parsed = JSON.parse(cleaned);
         } catch (e) {
           console.error(e);
@@ -248,7 +253,7 @@ export async function genAudio({
     voice,
     response_format: 'mp3',
   });
-  const res = await fetch("https://api.openai.com/v1/audio/speech", {
+  const res = await fetch(`${baseUrl}/v1/audio/speech`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

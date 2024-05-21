@@ -9,12 +9,18 @@ import { delMessage, pushMessage, setApiState } from "./ChatActions";
 import { submitMessage } from "./SubmitMessage";
 import { NextRouter } from "next/router";
 
-const baseUrl = process.env.NEXT_PUBLIC_OPENAI_BASE_URL || 'https://api.openai.com';
-// console.log(process.env);
-console.log("=================NEXT_PUBLIC_OPENAI_BASE_URL,",baseUrl)
+// const baseUrl = process.env.NEXT_PUBLIC_OPENAI_BASE_URL || 'https://api.openai.com';
+// // console.log(process.env);
+// console.log("=================NEXT_PUBLIC_OPENAI_BASE_URL,",baseUrl)
 
 const get = useChatStore.getState;
 const set = useChatStore.setState;
+
+function _baseUrl() {
+  let baseurl = useChatStore.getState().baseUrl;
+  console.log("=================,baseurl", baseurl);
+  return baseurl || 'https://api.openai.com';
+}
 
 export const sendAudioData = async (blob: Blob) => {
   const { audioChunks } = get();
@@ -131,7 +137,7 @@ export const destroyRecorder = async () => {
 };
 
 export const submitAudio = async (newMessage: Message, blob: Blob) => {
-  const apiUrl = `${baseUrl}/v1/audio/transcriptions`;
+  const apiUrl = `${_baseUrl()}/v1/audio/transcriptions`;
 
   const { apiKey, settingsForm } = get();
   const {

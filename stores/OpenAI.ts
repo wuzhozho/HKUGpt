@@ -5,9 +5,19 @@ import { Message, truncateMessages, countTokens } from "./Message";
 import { getModelInfo } from "./Model";
 import axios from "axios";
 
-const baseUrl = process.env.NEXT_PUBLIC_OPENAI_BASE_URL || 'https://api.openai.com';
+import { useChatStore } from "./ChatStore";
+
+// const baseUrl = process.env.NEXT_PUBLIC_OPENAI_BASE_URL || 'https://api.openai.com';
 // console.log(process.env);
-console.log("=================NEXT_PUBLIC_OPENAI_BASE_URL,",baseUrl)
+
+// console.log("=================NEXT_PUBLIC_OPENAI_BASE_URL,",baseUrl)
+
+function _baseUrl() {
+  let baseurl = useChatStore.getState().baseUrl;
+  console.log("=================,baseurl", baseurl);
+  return baseurl || 'https://api.openai.com';
+}
+
 export function assertIsError(e: any): asserts e is Error {
   if (!(e instanceof Error)) {
     throw new Error("Not an error");
@@ -15,6 +25,7 @@ export function assertIsError(e: any): asserts e is Error {
 }
 
 async function fetchFromAPI(endpoint: string, key: string): Promise<any> {
+  
   try {
     // const res = await axios.get(endpoint, {
     const res = await fetch(endpoint, {
@@ -29,9 +40,10 @@ async function fetchFromAPI(endpoint: string, key: string): Promise<any> {
   }
 }
 
+// 使用_baseUrl方法
 export async function testKey(key: string): Promise<boolean> {
   try {
-    const res = await fetchFromAPI(`${baseUrl}/v1/models`, key);
+    const res = await fetchFromAPI(`${_baseUrl()}/v1/models`, key);
     return res.status === 200;
   } catch (e) {
     console.error(e);
@@ -44,7 +56,7 @@ export async function testKey(key: string): Promise<boolean> {
 
 export async function fetchModels(key: string): Promise<string[]> {
   try {
-    const res = await fetchFromAPI(`${baseUrl}/v1/models`, key);
+    const res = await fetchFromAPI(`${_baseUrl()}/v1/models`, key);
     return res.data.data.map((model: any) => model.id);
   } catch (e) {
     return [];
@@ -60,7 +72,7 @@ export async function _streamCompletion(
 ) {
   const req = https.request(
     {
-      hostname: new URL(baseUrl).hostname,
+      hostname: new URL(_baseUrl()).hostname,
       port: 443,
       path: "/v1/chat/completions",
       method: "POST",
@@ -252,7 +264,7 @@ export async function genAudio({
     voice,
     response_format: 'mp3',
   });
-  const res = await fetch(`${baseUrl}/v1/audio/speech`, {
+  const res = await fetch(`${_baseUrl}/v1/audio/speech`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

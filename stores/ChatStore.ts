@@ -103,6 +103,7 @@ export interface ChatState {
     createdAt: string;
     updatedAt: string;
   };
+  baseUrl: string,
   apiState: APIState;
   apiKey: string | undefined;
   apiKey11Labs: string | undefined;
@@ -147,6 +148,7 @@ export const initialState = {
   jwt: undefined,
   lan: 'en',
   user: undefined,
+  baseUrl: 'https://api.openai.com',
   apiState: "idle" as APIState,
   apiKey: process.env.NEXT_PUBLIC_OPENAI_API_KEY || undefined,
   apiKey11Labs: process.env.NEXT_PUBLIC_11LABS_API_KEY || undefined,
@@ -188,6 +190,7 @@ export const initialState = {
   modelChoiceTTS: "whisper",
   modelChoiceSTT: "whisper",
   textInputValue: "",
+  
 };
 
 const store = () => ({ ...initialState } as ChatState);
@@ -205,4 +208,9 @@ export const useChatStore = create<ChatState>()(
 export const getJwtAndUser = () => {
   const state = useChatStore.getState(); // 获取当前全部状态
   return { jwt: state.jwt, user: state.user }; // 返回jwt和user
+};
+
+export const getBaseUrl = () => {
+  const state = useChatStore.getState(); 
+  return { baseUrl: state.baseUrl}; 
 };

@@ -94,6 +94,22 @@ const useStyles = createStyles((theme) => ({
         .color,
     },
   },
+  logoutLink: { 
+    ...theme.fn.focusStyles(),
+    display: "inline-block",
+    alignItems: "center",
+    textDecoration: "none",
+    fontSize: theme.fontSizes.sm,
+    color: theme.colorScheme === "dark" ? theme.colors.dark[1] : theme.colors.gray[7],
+    padding: `${theme.spacing.xs} ${theme.spacing.xs}`, 
+    borderRadius: theme.radius.sm,
+    fontWeight: 500,
+  
+    "&:hover": {
+        backgroundColor: theme.colorScheme === "dark" ? theme.colors.dark[6] : theme.colors.gray[0],
+        color: theme.colorScheme === "dark" ? theme.white : theme.black,
+    },
+  },  
 }));
 
 export default function MuHeader({ children }: any) {
@@ -224,8 +240,9 @@ export default function MuHeader({ children }: any) {
                 onMouseOut={(e) => e.currentTarget.style.backgroundColor = 'transparent'} 
                 onClick={() => setRegister2Open(true)}>{t('user-changepwd')}</a> | */}
                 <a style={{ margin: "0 10px",cursor: 'pointer',paddingLeft: '20px',paddingRight: '20px',whiteSpace: 'nowrap'}} 
-                onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#F3F4F5'} 
-                onMouseOut={(e) => e.currentTarget.style.backgroundColor = 'transparent'} 
+                className={classes.logoutLink}
+                // onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#F3F4F5'} 
+                // onMouseOut={(e) => e.currentTarget.style.backgroundColor = 'transparent'} 
                 onClick={() => setConfirmLogoutOpen(true)}>{t('user-logout')}</a>
               </>
             ) : (

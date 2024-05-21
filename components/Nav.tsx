@@ -169,7 +169,8 @@ export default function NavbarSimple() {
 
   // 获取和设置语言的状态变量方法
   const language = useChatStore((state) => state.lan);
-  console.log('--------------------lan=',language)
+  const user = useChatStore((state) => state.user);
+  // console.log('--------------------lan=',language)
 
   // 处理语言变更的函数
   const handleLanguageChange = (language:string) => {
@@ -350,10 +351,12 @@ export default function NavbarSimple() {
           </span>
         </a>
   */}
+
+
         <Modal opened={openedKeyModal} onClose={closeKeyModal} title="API Keys">
           <KeyModal close={closeKeyModal} />
         </Modal>
-
+{user && (
         <a
           href="#"
           className={classes.link}
@@ -367,6 +370,7 @@ export default function NavbarSimple() {
           <IconKey className={classes.linkIcon} stroke={1.5} />
           <span>API Keys</span>
         </a>
+   )}
       {/*
         <Modal
           opened={openedSettingsModal}

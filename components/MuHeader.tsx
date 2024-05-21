@@ -272,7 +272,7 @@ export default function MuHeader({ children }: any) {
           <Button variant="default" onClick={() => setConfirmLogoutOpen(false)}>
             {t('cancel')}
           </Button>
-          <Button color="red" onClick={handleLogout}>
+          <Button variant="default" onClick={handleLogout}>
             {t('confirm')}
           </Button>
         </Group>

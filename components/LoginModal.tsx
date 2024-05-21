@@ -64,7 +64,7 @@ const LoginPage: React.FC<Props> = ({ isOpen, onClose, onLogin }) => {
           // console.log("==============jwt,",jwt)
           // console.log("==============user,",user)
           // 存储到全局状态
-          useChatStore.setState({ jwt: jwt, user: user });
+          useChatStore.setState({ jwt: jwt, user: user, colorScheme: user.theme, });
           showNotification({
             title: 'success',
             message: t('user-login-success'),
@@ -105,7 +105,7 @@ const fetchConfig = async (jwt:string) => {
       update({
         // 前端配置key，后端不再更新key
         // apiKey: config.attributes.OPENAI_KEY,
-        colorScheme: config.attributes.theme,
+        // colorScheme: config.attributes.theme,
         baseUrl: config.attributes.BASE_URL,
         settingsForm: {
           ...config.attributes.settingsForm, // 拷贝之前的设置

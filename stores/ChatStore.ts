@@ -72,8 +72,10 @@ export const defaultSettings = {
   auto_title: true,
   // Whisper
   auto_detect_language: false,
-  spoken_language: "English (en)",
-  spoken_language_code: "en",
+  // spoken_language: "English (en)",
+  // spoken_language_code: "en",
+  spoken_language: "Chinese (zh)",
+  spoken_language_code: "zh",
   // OpenAI TTS
   voice_id_openai: OPENAI_TTS_VOICES[0],
   tts_model_openai: "tts-1",
@@ -181,8 +183,10 @@ export const initialState = {
   autoSendStreamingSTT: true,
   modelChoicesChat: undefined,
   modelChoiceChat: undefined,
-  modelChoiceTTS: "azure",
-  modelChoiceSTT: "azure",
+  // modelChoiceTTS: "azure",
+  // modelChoiceSTT: "azure",
+  modelChoiceTTS: "whisper",
+  modelChoiceSTT: "whisper",
   textInputValue: "",
 };
 

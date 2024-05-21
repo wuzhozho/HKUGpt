@@ -89,8 +89,10 @@ export default function Hero() {
       showTextDuringPTT: true,
       playerApiState: "idle",
       autoSendStreamingSTT: true,
-      modelChoiceTTS: "azure",
-      modelChoiceSTT: "azure"
+      // modelChoiceTTS: "azure",
+      // modelChoiceSTT: "azure"
+      modelChoiceTTS: "whisper",
+      modelChoiceSTT: "whisper"
     });
   }
 

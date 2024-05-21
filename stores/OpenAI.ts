@@ -14,19 +14,18 @@ export function assertIsError(e: any): asserts e is Error {
   }
 }
 
-async function fetchFromAPI(endpoint: string, key: string) {
+async function fetchFromAPI(endpoint: string, key: string): Promise<any> {
   try {
-    const res = await axios.get(endpoint, {
+    // const res = await axios.get(endpoint, {
+    const res = await fetch(endpoint, {
       headers: {
         Authorization: `Bearer ${key}`,
       },
     });
     return res;
   } catch (e) {
-    if (axios.isAxiosError(e)) {
-      console.error(e.response?.data);
-    }
-    throw e;
+      console.error(e);
+      throw e;
   }
 }
 
@@ -35,10 +34,9 @@ export async function testKey(key: string): Promise<boolean> {
     const res = await fetchFromAPI(`${baseUrl}/v1/models`, key);
     return res.status === 200;
   } catch (e) {
-    if (axios.isAxiosError(e)) {
-      if (e.response!.status === 401) {
-        return false;
-      }
+    console.error(e);
+    if (e instanceof Error && e.message.includes('401')) {
+      return false;
     }
   }
   return false;
@@ -155,7 +153,7 @@ export async function streamCompletion(
 
   const successCallback = (res: IncomingMessage) => {
     res.on("data", (chunk) => {
-      console.log("-------------------chunk-",chunk.toString())
+      // console.log("-------------------chunk-",chunk.toString())
       if (abortController?.signal.aborted) {
         res.destroy();
         endCallback?.(0, 0);
@@ -164,11 +162,11 @@ export async function streamCompletion(
 
       // Split response into individual messages
       const allMessages = chunk.toString().split("\n\n");
-      console.log("--------------------",allMessages)
+      // console.log("--------------------",allMessages)
       for (const message of allMessages) {
         // Remove first 5 characters ("data:") of response
         const cleaned = message.toString().trim().slice(5);
-        console.log("-------cleaned,",cleaned);
+        // console.log("-------cleaned,",cleaned);
 
         if (!cleaned || cleaned === " [DONE]") {
           return;

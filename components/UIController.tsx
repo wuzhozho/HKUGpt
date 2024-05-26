@@ -113,7 +113,9 @@ const ChatInput = () => {
 
   const activeChatId = useChatStore((state) => state.activeChatId);
   const showTextDuringPTT = useChatStore((state) => state.showTextDuringPTT);
-  const showTextInput = !pushToTalkMode || showTextDuringPTT || editingMessage;
+  let user = useChatStore((state) => state.user);
+
+  let showTextInput = (user != null && user != undefined) && (!pushToTalkMode || showTextDuringPTT || editingMessage);
 
   const modelChoiceSTT = useChatStore((state) => state.modelChoiceSTT);
   const Recorder = modelChoiceSTT === "azure" ? AzureRecorder : OpusRecorder;

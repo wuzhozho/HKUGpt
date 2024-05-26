@@ -115,7 +115,7 @@ export function APIPanel({
         {descriptionBelowInput}
         <Group position="right" mt="md">
           <Button
-            type="submit"
+            type="submit" variant="light"
             disabled={initialKey === apiKey && initialRegion === region}
           >
             Save

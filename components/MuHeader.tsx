@@ -167,8 +167,8 @@ export default function MuHeader({ children }: any) {
 
   const [confirmLogoutOpen, setConfirmLogoutOpen] = useState(false);
   const handleLogout = () => {
-    // useChatStore.setState({ jwt: undefined, user: undefined, apiKey: "", colorScheme :"light"});
-    useChatStore.setState({ jwt: undefined, user: undefined, colorScheme :"light"});
+    useChatStore.setState({ jwt: undefined, user: undefined, apiKey: "", colorScheme :"light"});
+    // useChatStore.setState({ jwt: undefined, user: undefined, colorScheme :"light"});
     
     setIsLoggedIn(false);
     setConfirmLogoutOpen(false); // 关闭确认对话框

@@ -350,13 +350,12 @@ export default function NavbarSimple() {
             {upperFirst(colorScheme === "light" ? "dark" : "light")} theme
           </span>
         </a>
-  */}
 
 
         <Modal opened={openedKeyModal} onClose={closeKeyModal} title="API Keys">
           <KeyModal close={closeKeyModal} />
         </Modal>
-{user && (
+
         <a
           href="#"
           className={classes.link}
@@ -370,8 +369,7 @@ export default function NavbarSimple() {
           <IconKey className={classes.linkIcon} stroke={1.5} />
           <span>API Keys</span>
         </a>
-   )}
-      {/*
+
         <Modal
           opened={openedSettingsModal}
           onClose={closeSettingsModal}

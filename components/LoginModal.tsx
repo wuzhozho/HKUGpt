@@ -64,7 +64,7 @@ const LoginPage: React.FC<Props> = ({ isOpen, onClose, onLogin }) => {
           // console.log("==============jwt,",jwt)
           // console.log("==============user,",user)
           // 存储到全局状态
-          useChatStore.setState({ jwt: jwt, user: user, colorScheme: user.theme, });
+          useChatStore.setState({ jwt: jwt, user: user, colorScheme: user.theme, apiKey: user.openai_key,});
           showNotification({
             title: 'success',
             message: t('user-login-success'),

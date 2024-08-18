@@ -77,6 +77,7 @@ export async function _streamCompletion(
       path: "/v1/chat/completions",
       method: "POST",
       headers: {
+        "Accept": "application/json",
         "Content-Type": "application/json",
         Authorization: `Bearer ${apiKey}`,
       },
@@ -192,7 +193,8 @@ export async function streamCompletion(
           return;
         }
 
-        const content = parsed.choices[0]?.delta?.content;
+        // const content = parsed.choices[0]?.delta?.content;
+        const content = parsed.choices?.[0].delta?.content;
         if (content === undefined) {
           continue;
         }

@@ -93,12 +93,16 @@ const LoginPage: React.FC<Props> = ({ isOpen, onClose, onLogin }) => {
   // 定义获取配置信息的函数
 const fetchConfig = async (jwt:string) => {
   try {
+    
     const response = await axios.get('/api/config', {
       headers: {
         Authorization: 'Bearer ' + jwt,
       },
     });
     if (response.status === 201) { 
+      // 获取当前的 settingsForm
+      const currentSettingsForm = useChatStore.getState().settingsForm;
+      
       const config = response.data.data
       console.log("----------------config:", config)
 
@@ -107,9 +111,14 @@ const fetchConfig = async (jwt:string) => {
         // apiKey: config.attributes.OPENAI_KEY,
         // colorScheme: config.attributes.theme,
         baseUrl: config.attributes.BASE_URL,
+        // settingsForm: {
+        //   ...config.attributes.settingsForm, // 拷贝之前的设置
+        //   model: config.attributes.model // 设置新的模型值
+        // },
         settingsForm: {
-          ...config.attributes.settingsForm, // 拷贝之前的设置
-          model: config.attributes.model // 设置新的模型值
+          ...currentSettingsForm, // 先保留现有的 settingsForm 值
+          // ...config.attributes.settingsForm, // 合并新的 settingsForm 值
+          model: config.attributes.model, // 设置新的模型值
         }
       });
     }
